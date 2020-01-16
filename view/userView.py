@@ -106,6 +106,15 @@ class userView():
             print("Votre compte a été créé, vous n'avez plus qu'à vous connecter")
         time.sleep(3)
 
+    def verifiy_password(self, user, password):
+        """Check that a given password matches a user's one"""
+        # Hash the given password
+        password = hashlib.sha256(bytes(password, encoding="ascii")).hexdigest()
+        if password == user['password']:
+            return True
+        return False
+
+
 
 
 
