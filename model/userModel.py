@@ -29,3 +29,26 @@ class userModel():
         self.db.close_connection()
         return result
 
+    def add_user(self, user):
+        """Given a list with values related to the user entitiy store a new entry in database
+        The query is in a try bloc to display an information message to the user if insert fails
+            Étant donné une liste avec des valeurs liées à l'entité utilisateur,
+            stocker une nouvelle entrée dans la base de données
+        La requête est dans un bloc try pour afficher un message d'information à l'utilisateur si l'insertion échoue"""
+        try:
+            self.db.initialize_connection()
+            self.db.cursor.execute("""
+                INSERT INTO users (name, firstname, pseudo, email, age, password)
+                VALUES (%s, %s, %s, %s, %s, %s)
+                ,
+                (user[0], user[1], user[2], user[3], user[4], user[5])
+            """)
+            self.db.connection.commit()
+            return True
+        except Exception as e:
+            print("Il semble que nous n'ayons pas pu vous enregistrer, merci d'essayer à nouveau")
+            return False
+        finally:
+            self.db.close_connection()
+
+
