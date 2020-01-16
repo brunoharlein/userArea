@@ -51,4 +51,21 @@ class userModel():
         finally:
             self.db.close_connection()
 
+    def delete_user(self, user):
+        """Delete a user by its id from the database
+        The query is in a try block to display an error message if query fails
+        Supprimer un utilisateur par son identifiant de la base de données
+        La requête est dans un bloc try pour afficher un message d'erreur si la requête échoue"""
+        try:
+            self.db.initialize_connection()
+            self.db.cursor.execute("DELETE FROM users WHERE id = %s", (user['id'],))
+            self.db.connection.commit()
+            return True
+        except Exception as e:
+            print("Un problème est survenu, nous n'avons pas pu supprimer votre compte")
+            return False
+        finally:
+            self.db.close_connection()
+
+
 
