@@ -82,6 +82,29 @@ class userView():
             # Mettre à jour la base de données
             model.update_user(user)
 
+    def new(self):
+        """Ask information to create a new user in database"""
+        # Instanciate the model to operate queries on users table
+        model = userModel()
+        # Store the translations for the names of the columns
+        infos_text = ["nom", "prénom", "pseudo", "email", "âge", "mot de passe"]
+        # Store user's values
+        user = []
+        # Show an input for each column and add the value to user
+        for text in infos_text:
+            user.append(input(text + " : "))
+        # Crypt the password
+        user[-1] = hashlib.sha256(bytes(user[-1], encoding="ascii")).hexdigest()
+        # Check that both pseudo and email are available
+        while model.check_pseudo(user[2]):
+            user[2] = input("Ce pseudo est déjà pris : ")
+        while model.check_email(user[3]):
+            user[3] = input("Cette adresse mail est déjà prise : ")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        # Add the user in the database
+        if model.add_user(user):
+            print("Votre compte a été créé, vous n'avez plus qu'à vous connecter")
+        time.sleep(3)
 
 
 
