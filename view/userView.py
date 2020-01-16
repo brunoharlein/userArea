@@ -55,7 +55,7 @@ class userView():
         # Show user
         print("Bonjour voici nos informations sur vous : ")
         print(
-            "nom : {}\nprénom : {}\nage : {}\npseudo : {}\nemail : {}\n"
+            "{}\nnom : {}\nprénom : {}\nage : {}\npseudo : {}\nemail"
             .format(user['name'], user['firstname'], user['age'], user['pseudo'], user['email'])
         )
         # Get action from user
@@ -69,7 +69,7 @@ class userView():
         elif action == "m":
             # Ask which column to change and the new value to set
             # Demandez quelle colonne modifier et quelle nouvelle valeur définir
-            column = input("Que voulez-vous modifier ? (name, firstname, pseudo, email, age, password) : ")
+            column = input("Que voulez-vous modifier ? (name, firstname, email, age, password, pseudo) : ")
             value = input("Nouvelle valeur : ")
             # If the user changes the password with crypt it
             # Si l'utilisateur change le mot de passe avec crypt il
@@ -87,7 +87,7 @@ class userView():
         # Instanciate the model to operate queries on users table
         model = userModel()
         # Store the translations for the names of the columns
-        infos_text = ["nom", "prénom", "pseudo", "email", "âge", "mot de passe"]
+        infos_text = ["nom", "prénom", "email", "âge", "mot de passe", "pseudo"]
         # Store user's values
         user = []
         # Show an input for each column and add the value to user

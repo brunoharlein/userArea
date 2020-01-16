@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="25031b5d-ad1d-4393-a1d7-108c28292133" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/userModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/userModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/userView.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/userView.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,5 +49,11 @@
       <updated>1579166818330</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="440" y="190" key="#Inspections" timestamp="1579188975550">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="440" y="190" key="#Inspections/0.0.1680.1050@0.0.1680.1050" timestamp="1579188975550" />
   </component>
 </project>

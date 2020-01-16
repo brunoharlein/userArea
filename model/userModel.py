@@ -22,7 +22,7 @@ class userModel():
 
     def check_email(self, email):
         """Given an email, check if it already exists and return it
-            Étant donné un e-mail, vérifiez s'il existe déjà et retournez-le"""
+        donne un e-mail, vérifiez s'il existe déjà et retournez-le"""
         self.db.initialize_connection()
         self.db.cursor.execute("SELECT email FROM users WHERE email = %s", (email,))
         result = self.db.cursor.fetchall()
@@ -32,14 +32,14 @@ class userModel():
     def add_user(self, user):
         """Given a list with values related to the user entitiy store a new entry in database
         The query is in a try bloc to display an information message to the user if insert fails
-            Étant donné une liste avec des valeurs liées à l'entité utilisateur,
+            donne une liste avec des valeurs liées à l'entité utilisateur,
             stocker une nouvelle entrée dans la base de données
         La requête est dans un bloc try pour afficher un message d'information à l'utilisateur si l'insertion échoue"""
 
         try:
             self.db.initialize_connection()
             self.db.cursor.execute("""
-                INSERT INTO users (name, firstname, pseudo, email, age, password)
+                INSERT INTO users (name, firstname, email, age, password, pseudo)
                 VALUES (%s, %s, %s, %s, %s, %s)
                 ,
                 (user[0], user[1], user[2], user[3], user[4], user[5])
@@ -83,10 +83,10 @@ class userModel():
             self.db.initialize_connection()
             self.db.cursor.execute("""
                 UPDATE users
-                SET name = %s, firstname = %s, pseudo = %s, email = %s, age = %s, password = %s
+                SET name = %s, firstname = %s, email = %s, age = %s, password = %s, pseudo = %s
                 WHERE id = %s
                 """,
-                (user['name'], user['firstname'], user['pseudo'], user['email'], user['age'], user['password'], user['id']))
+                (user['name'], user['firstname'], user['email'], user['age'], user['password'], user['pseudo'], user['id']))
             self.db.connection.commit()
             return True
 
