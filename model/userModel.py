@@ -35,6 +35,7 @@ class userModel():
             Étant donné une liste avec des valeurs liées à l'entité utilisateur,
             stocker une nouvelle entrée dans la base de données
         La requête est dans un bloc try pour afficher un message d'information à l'utilisateur si l'insertion échoue"""
+
         try:
             self.db.initialize_connection()
             self.db.cursor.execute("""
@@ -45,9 +46,11 @@ class userModel():
             """)
             self.db.connection.commit()
             return True
+
         except Exception as e:
             print("Il semble que nous n'ayons pas pu vous enregistrer, merci d'essayer à nouveau")
             return False
+
         finally:
             self.db.close_connection()
 
@@ -56,16 +59,44 @@ class userModel():
         The query is in a try block to display an error message if query fails
         Supprimer un utilisateur par son identifiant de la base de données
         La requête est dans un bloc try pour afficher un message d'erreur si la requête échoue"""
+
         try:
             self.db.initialize_connection()
             self.db.cursor.execute("DELETE FROM users WHERE id = %s", (user['id'],))
             self.db.connection.commit()
             return True
+
         except Exception as e:
             print("Un problème est survenu, nous n'avons pas pu supprimer votre compte")
             return False
+
         finally:
             self.db.close_connection()
+
+    def update_user(self, user):
+        """Given a dictionnary, update a user's values in database
+        The query is in a try block to display an error message if query fails
+        Étant donné un dictionnaire, mettre à jour les valeurs d'un utilisateur dans la base de données
+        La requête est dans un bloc try pour afficher un message d'erreur si la requête échoue"""
+
+        try:
+            self.db.initialize_connection()
+            self.db.cursor.execute("""
+                UPDATE users
+                SET name = %s, firstname = %s, pseudo = %s, email = %s, age = %s, password = %s
+                WHERE id = %s
+                """,
+                (user['name'], user['firstname'], user['pseudo'], user['email'], user['age'], user['password'], user['id']))
+            self.db.connection.commit()
+            return True
+
+        except Exception as e:
+            print("Un problème est survenu, nous n'avons pas pu modifier vos informations")
+            return False
+
+        finally:
+            self.db.close_connection()
+
 
 
 
