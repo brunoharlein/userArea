@@ -39,11 +39,11 @@ class userModel():
         try:
             self.db.initialize_connection()
             self.db.cursor.execute("""
-                INSERT INTO users (name, firstname, email, age, password, pseudo)
+                INSERT INTO users (name, firstname, pseudo, email, age, password)
                 VALUES (%s, %s, %s, %s, %s, %s)
-                ,
+                """,
                 (user[0], user[1], user[2], user[3], user[4], user[5])
-            """)
+            )
             self.db.connection.commit()
             return True
 
@@ -86,7 +86,7 @@ class userModel():
                 SET name = %s, firstname = %s, email = %s, age = %s, password = %s, pseudo = %s
                 WHERE id = %s
                 """,
-                (user['name'], user['firstname'], user['email'], user['age'], user['password'], user['pseudo'], user['id']))
+                (user['name'], user['firstname'], user['pseudo'], user['email'], user['age'], user['password'], user['id']))
             self.db.connection.commit()
             return True
 

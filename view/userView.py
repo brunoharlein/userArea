@@ -55,7 +55,7 @@ class userView():
         # Show user
         print("Bonjour voici nos informations sur vous : ")
         print(
-            "{}\nnom : {}\nprénom : {}\nage : {}\npseudo : {}\nemail"
+            "nom : {}\nprénom : {}\nage : {}\npseudo : {}\nemail : {}\n"
             .format(user['name'], user['firstname'], user['age'], user['pseudo'], user['email'])
         )
         # Get action from user
@@ -85,23 +85,29 @@ class userView():
     def new(self):
         """Ask information to create a new user in database"""
         # Instanciate the model to operate queries on users table
+        # Instancier le modèle pour exécuter des requêtes sur la table des utilisateurs
         model = userModel()
         # Store the translations for the names of the columns
-        infos_text = ["nom", "prénom", "email", "âge", "mot de passe", "pseudo"]
+        # Stockez les traductions pour les noms des colonnes
+        infos_text = ["nom", "prénom", "pseudo", "email", "âge", "mot de passe"]
         # Store user's values
+        # Stocker les valeurs de l'utilisateur
         user = []
         # Show an input for each column and add the value to user
+        # Afficher une entrée pour chaque colonne et ajouter la valeur à l'utilisateur
         for text in infos_text:
             user.append(input(text + " : "))
         # Crypt the password
         user[-1] = hashlib.sha256(bytes(user[-1], encoding="ascii")).hexdigest()
         # Check that both pseudo and email are available
+        # Vérifiez que les pseudo et les e-mails sont disponibles
         while model.check_pseudo(user[2]):
             user[2] = input("Ce pseudo est déjà pris : ")
         while model.check_email(user[3]):
             user[3] = input("Cette adresse mail est déjà prise : ")
         os.system('cls' if os.name == 'nt' else 'clear')
         # Add the user in the database
+        # Ajouter l'utilisateur dans la base de données
         if model.add_user(user):
             print("Votre compte a été créé, vous n'avez plus qu'à vous connecter")
         time.sleep(3)
@@ -109,6 +115,7 @@ class userView():
     def verifiy_password(self, user, password):
         """Check that a given password matches a user's one"""
         # Hash the given password
+        # Hachage du mot de passe donné
         password = hashlib.sha256(bytes(password, encoding="ascii")).hexdigest()
         if password == user['password']:
             return True
